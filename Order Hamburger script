@@ -1,1 +1,57 @@
-wwww.
+# Function to display the menu and take orders for Hamburgers
+order_hamburger <- function() {
+  cat("Welcome to the Rita Li's Hamburger Order System!\n")
+  
+  # Hamburger sizes
+  sizes <- c("Small", "Medium", "Large")
+  
+  # Hamburger types / patties
+  types <- c("Classic Beef", "Cheeseburger", "Chicken", "Veggie", "Double Beef")
+  
+  # Toppings
+  toppings <- c("Lettuce", "Tomato", "Onion", "Pickles", "Bacon", "Extra Cheese", "Mushrooms")
+  
+  # Get size choice
+  cat("\nChoose a hamburger size:\n")
+  for (i in seq_along(sizes)) {
+    cat(i, "-", sizes[i], "\n")
+  }
+  size_choice <- as.integer(readline(prompt = "Enter the number corresponding to your choice: "))
+  
+  # Get type choice
+  cat("\nChoose a hamburger type:\n")
+  for (i in seq_along(types)) {
+    cat(i, "-", types[i], "\n")
+  }
+  type_choice <- as.integer(readline(prompt = "Enter the number corresponding to your choice: "))
+  
+  # Get toppings choice
+  cat("\nChoose your toppings (type the numbers separated by commas, e.g. 1,3,5):\n")
+  for (i in seq_along(toppings)) {
+    cat(i, "-", toppings[i], "\n")
+  }
+  topping_input <- readline(prompt = "Enter your choices: ")
+  topping_choices <- as.integer(trimws(strsplit(topping_input, ",")[[1]]))
+  
+  # Build order summary
+  selected_toppings <- toppings[topping_choices]
+  
+  order_summary <- list(
+    Size = sizes[size_choice],
+    Type = types[type_choice],
+    Toppings = selected_toppings
+  )
+  
+  # Print order summary
+  cat("\n=== Your Order Summary ===\n")
+  cat("Hamburger Size:", order_summary$Size, "\n")
+  cat("Hamburger Type:", order_summary$Type, "\n")
+  cat("Toppings:", ifelse(length(selected_toppings) > 0, 
+                          paste(selected_toppings, collapse = ", "), 
+                          "No toppings"), "\n")
+  
+  cat("\nThank you for your order! Enjoy your hamburger! 🍔\n")
+}
+
+# Call the function to start the order process
+order_hamburger()
